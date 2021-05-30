@@ -63,8 +63,8 @@
         const userName = JSON.parse(document.getElementById('json-username').textContent);
 
         const chatSocket = new WebSocket(
-            'ws://'
-            + 'localhost:8000'
+            'wss://'
+            + window.location.hostname
             + '/ws/'
             + roomName
             + '/'
