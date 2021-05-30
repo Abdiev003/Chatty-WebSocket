@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chatty</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-6 is-offset-3 mb-6">
+                    <section class="hero is-primary">
+                        <div class="hero-body">
+                            <p class="title">
+                                Chatty
+                            </p>
+                            <p class="subtitle">
+                                A simple chat built with Django, Channels and Redis
+                            </p>
+                        </div>
+                    </section>
+                </div>
+                <div class="column is-4 is-offset-4">
+                    <div class="field">
+                        <label>Room Name</label>
+
+                        <div class="control">
+                            <input type="text" id="room-name-input" placeholder="Room name" class="input">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Username</label>
+
+                        <div class="control">
+                            <input type="text" id="username-input" placeholder="Username" class="input">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <a id="room-name-submit" class="button is-info">Submit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelector('#room-name-input').focus();
+
+        document.querySelector('#room-name-submit').onclick = function (e) {
+            var roomName = document.querySelector('#room-name-input').value
+            var userName = document.querySelector('#username-input').value
+
+            window.location.replace(roomName + '/?username=' + userName)
+        }
+    </script>
+</body>
+
+</html>

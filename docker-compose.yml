@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: "always"
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/vhost/:/etc/nginx/vhost.d:ro
+      - ./nginx/conf.d/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
+      - ./static/:/myfiles/static
+
+  redis:
+    container_name: redis
+    image: redis:5
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redisdb/:/data
+    restart: always
+    env_file: ./.env
+
+  web:
+    build: .
+    volumes:
+      - .:/code
+      - ./static/:/code/static
+    ports:
+      - "8000:8000"
+    depends_on:
+      - "redis"
+    env_file: ./.env
